@@ -1,5 +1,5 @@
 package com.cognixia.models;
 
-public class Provider {
+public class Provider extends Account {
 
 }
