@@ -1,5 +1,7 @@
 package com.cognixia.models;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
 public class AccountTest {
@@ -13,7 +15,7 @@ public class AccountTest {
     user.addClaim("claim2", "2025-01-20");
     user.addClaim("claim3", "2025-02-01");
     String expectedOutput = "claim1 2025-01-01\nclaim2 2025-01-20\nclaim3 2025-02-01";
-    assertEquals(user.listClaims(), expectedOutput);
+    assertEquals(expectedOutput, user.listClaims());
   }
 
   // 2. As a user, I should be able to search claims within a range of dates
