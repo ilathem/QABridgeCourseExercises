@@ -13,4 +13,8 @@ public class Claim {
     public String printClaim() {
         return name + " " + date.toString();
     }
+    
+    public LocalDate getDate() {
+        return this.date;
+    }
 }

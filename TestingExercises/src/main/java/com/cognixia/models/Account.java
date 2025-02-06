@@ -17,11 +17,9 @@ public class Account {
     }
 
     public void addClaim(String name, String dateString) {
-        String[] dateArray = dateString.split("-");
-        LocalDate date = LocalDate.of(Integer.parseInt(dateArray[0]),Integer.parseInt(dateArray[1]),Integer.parseInt(dateArray[2]));
-        this.addClaim(name, date);
+        this.addClaim(name, this.convertStrToLocal(dateString));
     }
-    
+
     public void addClaim(String name) {
         this.addClaim(name, LocalDate.now());
     }
@@ -31,8 +29,37 @@ public class Account {
         Iterator<Claim> claimIter = claims.iterator();
         while (claimIter.hasNext()) {
             output += claimIter.next().printClaim();
-            if (claimIter.hasNext()) output += "\n";
+            if (claimIter.hasNext())
+                output += "\n";
         }
         return output;
+    }
+
+    public String searchClaims(LocalDate startDate, LocalDate endDate) {
+        String output = "";
+        Iterator<Claim> claimIter = claims.iterator();
+        boolean isFirstTerm = true;
+        while (claimIter.hasNext()) {
+            Claim claim = claimIter.next();
+            if (claim.getDate().toEpochDay() >= startDate.toEpochDay() &&
+                    claim.getDate().toEpochDay() <= endDate.toEpochDay()) {
+                if (!isFirstTerm) output += "\n";
+                output += claim.printClaim();
+                isFirstTerm = false;
+            }
+        }
+        return output;
+    }
+
+    public String searchClaims(String startDate, String endDate) {
+        return this.searchClaims(
+                this.convertStrToLocal(startDate),
+                this.convertStrToLocal(endDate));
+    }
+
+    private LocalDate convertStrToLocal(String dateString) {
+        String[] dateArray = dateString.split("-");
+        return LocalDate.of(Integer.parseInt(dateArray[0]), Integer.parseInt(dateArray[1]),
+                Integer.parseInt(dateArray[2]));
     }
 }
