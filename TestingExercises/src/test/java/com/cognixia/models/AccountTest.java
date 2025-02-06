@@ -19,6 +19,16 @@ public class AccountTest {
   }
 
   // 2. As a user, I should be able to search claims within a range of dates
+  @Test
+  void testSearchClaims() {
+    User user = new User();
+    user.addClaim("claim1", "2025-01-01");
+    user.addClaim("claim2", "2025-01-20");
+    user.addClaim("claim3", "2025-02-01");
+    String expectedOutput = "claim1 2025-01-01\nclaim2 2025-01-20";
+    String actualOutput = user.searchClaims("2025-01-01", "2025-01-31");
+    assertEquals(expectedOutput, actualOutput);
+  }
 
   // 3. As a provider, I should be able to upload several claims at once and add
   // them to the database
