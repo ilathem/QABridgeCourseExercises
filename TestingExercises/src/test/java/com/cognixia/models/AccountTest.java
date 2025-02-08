@@ -11,7 +11,7 @@ public class AccountTest {
   // This is assuming that member == "Account" with limited access.
   @Test
   void testListClaims() {
-    User user = new User();
+    Account user = new Account();
     user.addClaim("claim1", "2025-01-01");
     user.addClaim("claim2", "2025-01-20");
     user.addClaim("claim3", "2025-02-01");
@@ -35,5 +35,19 @@ public class AccountTest {
 
   // 3. As a provider, I should be able to upload several claims at once and add
   // them to the database
+  @Test
+  void testUploadSeveralClaims() {
+    Provider provider = new Provider();
+    String[][] testArr = new String[3][2];
+    testArr[0][0] = "claim1";
+    testArr[1][0] = "claim2";
+    testArr[2][0] = "claim3";
+    testArr[0][1] = "2025-01-01";
+    testArr[1][1] = "2025-01-20";
+    testArr[2][1] = "2025-02-01";
+    provider.addClaims(testArr);
+    String expectedOutput = "claim1 2025-01-01\nclaim2 2025-01-20\nclaim3 2025-02-01";
+    assertEquals(expectedOutput, provider.listClaims());
+  } 
 
 }
