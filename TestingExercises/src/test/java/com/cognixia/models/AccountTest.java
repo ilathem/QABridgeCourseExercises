@@ -8,6 +8,7 @@ public class AccountTest {
 
   // 1. As a member, I should be able to view a list of my past claims so I can
   // verify my claim status
+  // This is assuming that member == "Account" with limited access.
   @Test
   void testListClaims() {
     User user = new User();
@@ -19,6 +20,8 @@ public class AccountTest {
   }
 
   // 2. As a user, I should be able to search claims within a range of dates
+  // This is assuming that the user == "User", inherting member access with 
+  // additional search features.
   @Test
   void testSearchClaims() {
     User user = new User();
