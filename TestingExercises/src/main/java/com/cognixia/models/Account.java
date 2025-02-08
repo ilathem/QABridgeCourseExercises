@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Account {
-    ArrayList<Claim> claims;
+    protected ArrayList<Claim> claims;
 
     public Account() {
         // new account created
