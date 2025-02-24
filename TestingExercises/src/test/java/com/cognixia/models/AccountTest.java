@@ -2,7 +2,7 @@ package com.cognixia.models;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 public class AccountTest {
 
@@ -10,6 +10,7 @@ public class AccountTest {
   // verify my claim status
   // This is assuming that member == "Account" with limited access.
   @Test
+  @DisplayName("Test list claims")
   void testListClaims() {
     Account user = new Account();
     user.addClaim("claim1", "2025-01-01");
@@ -20,9 +21,10 @@ public class AccountTest {
   }
 
   // 2. As a user, I should be able to search claims within a range of dates
-  // This is assuming that the user == "User", inherting member access with 
+  // This is assuming that the user == "User", inherting member access with
   // additional search features.
   @Test
+  @DisplayName("Test search claims")
   void testSearchClaims() {
     User user = new User();
     user.addClaim("claim1", "2025-01-01");
@@ -36,6 +38,7 @@ public class AccountTest {
   // 3. As a provider, I should be able to upload several claims at once and add
   // them to the database
   @Test
+  @DisplayName("Test upload several claims")
   void testUploadSeveralClaims() {
     Provider provider = new Provider();
     String[][] testArr = new String[3][2];
@@ -48,6 +51,6 @@ public class AccountTest {
     provider.addClaims(testArr);
     String expectedOutput = "claim1 2025-01-01\nclaim2 2025-01-20\nclaim3 2025-02-01";
     assertEquals(expectedOutput, provider.listClaims());
-  } 
+  }
 
 }
